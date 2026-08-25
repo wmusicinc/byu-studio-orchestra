@@ -290,7 +290,7 @@
   function parse(s){ var p = s.split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
   function fmt(s){ var d = parse(s); return MON[d.getMonth()] + ' ' + d.getDate(); }
 
-  var sel = 'all';
+  var sel = 'strings';
   try { var saved = localStorage.getItem('so-section');
         if (saved && SECTIONS.some(function(s){ return s.id === saved; })) sel = saved; } catch(e){}
 
