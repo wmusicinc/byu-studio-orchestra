@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="MUSIC 320R BYU Studio Orchestra — Fall 2026 recording schedule.">
+<meta name="robots" content="noindex">
+<title>Studio Orchestra Call Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root{
+    --ground:#F4F6FA;
+    --surface:#FFFFFF;
+    --surface-2:#EAEFF6;
+    --border:#DBE2EC;
+    --border-strong:#BFCBDA;
+    --ink:#0F1720;
+    --muted:#5C6878;
+    --navy:#002E5D;
+    --on-navy:#FFFFFF;
+    --navy-soft:#3A6796;
+    --brass:#8A6520;
+    --brass-bg:#F7EFDF;
+    --brass-line:#D9C398;
+    --shadow:0 1px 2px rgba(15,23,32,.05), 0 10px 28px -18px rgba(0,46,93,.35);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#0A111C;
+      --surface:#121C2A;
+      --surface-2:#0E1723;
+      --border:#22314A;
+      --border-strong:#33455F;
+      --ink:#E8EEF6;
+      --muted:#8FA0B4;
+      --navy:#0B2947;
+      --on-navy:#EAF1F9;
+      --navy-soft:#7FA6CC;
+      --brass:#D9AE60;
+      --brass-bg:#1E1A10;
+      --brass-line:#4A3A1D;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0A111C;
+    --surface:#121C2A;
+    --surface-2:#0E1723;
+    --border:#22314A;
+    --border-strong:#33455F;
+    --ink:#E8EEF6;
+    --muted:#8FA0B4;
+    --navy:#0B2947;
+    --on-navy:#EAF1F9;
+    --navy-soft:#7FA6CC;
+    --brass:#D9AE60;
+    --brass-bg:#1E1A10;
+    --brass-line:#4A3A1D;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.8);
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:"Barlow","Helvetica Neue",Arial,sans-serif;
+    font-size:16px; line-height:1.5;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{ max-width:44rem; margin:0 auto; padding:0 1.15rem 3.5rem; }
+
+  /* ---------- masthead ---------- */
+  .mast{
+    background:var(--navy); color:var(--on-navy);
+    margin:0 -1.15rem; padding:1.6rem 1.15rem 1.5rem;
+  }
+  .mast .inner{ max-width:44rem; margin:0 auto; }
+  .eyebrow{
+    font-family:"Barlow Condensed",sans-serif; font-weight:600;
+    font-size:.85rem; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--navy-soft);
+  }
+  h1{
+    font-family:"Barlow Condensed",sans-serif; font-weight:700;
+    font-size:clamp(2.1rem,8vw,3rem); line-height:1.02; margin:.35rem 0 0;
+    letter-spacing:-.005em; text-transform:uppercase; text-wrap:balance;
+  }
+  .mast .where{
+    margin-top:.6rem; font-size:.95rem; color:#B9CDE2;
+    display:flex; flex-wrap:wrap; gap:.35rem .9rem;
+  }
+  :root[data-theme="dark"] .mast .where{ color:#9FB8D0; }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .mast .where{ color:#9FB8D0; } }
+
+  /* ---------- section picker ---------- */
+  .picker{
+    position:sticky; top:0; z-index:5;
+    background:var(--ground);
+    margin:0 -1.15rem; padding:.7rem 1.15rem .7rem;
+    border-bottom:1px solid var(--border);
+  }
+  .picker .inner{ max-width:44rem; margin:0 auto; }
+  .picker .lab{
+    font-family:"Barlow Condensed",sans-serif; font-weight:600;
+    font-size:.8rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:.45rem;
+  }
+  .chips{ display:flex; flex-wrap:wrap; gap:.4rem; }
+  .chip{
+    font-family:"Barlow Condensed",sans-serif; font-weight:600;
+    font-size:1rem; letter-spacing:.04em; text-transform:uppercase;
+    padding:.4rem .8rem; border-radius:999px;
+    border:1px solid var(--border-strong); background:var(--surface); color:var(--ink);
+    cursor:pointer; transition:background .12s ease, color .12s ease, border-color .12s ease;
+  }
+  .chip:hover{ border-color:var(--navy-soft); }
+  .chip:focus-visible{ outline:2px solid var(--brass); outline-offset:2px; }
+  .chip[aria-pressed="true"]{
+    background:var(--navy); color:var(--on-navy); border-color:var(--navy);
+  }
+
+  /* ---------- next call ---------- */
+  .next{
+    margin-top:1.25rem; padding:1rem 1.1rem;
+    background:var(--brass-bg); border:1px solid var(--brass-line);
+    border-radius:.5rem;
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:.3rem .9rem;
+  }
+  .next[hidden]{ display:none; }
+  .next .k{
+    font-family:"Barlow Condensed",sans-serif; font-weight:700;
+    font-size:.82rem; letter-spacing:.16em; text-transform:uppercase; color:var(--brass);
+    flex:0 0 100%;
+  }
+  .next .d{
+    font-family:"Barlow Condensed",sans-serif; font-weight:700;
+    font-size:1.5rem; text-transform:uppercase; letter-spacing:.01em; color:var(--ink);
+  }
+  .next .t{
+    font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:1rem; color:var(--ink);
+    font-variant-numeric:tabular-nums;
+  }
+  .next .n{ font-size:.95rem; color:var(--muted); flex:0 0 100%; }
+
+  /* ---------- table ---------- */
+  .listhead{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin:2rem 0 .5rem;
+  }
+  .listhead h2{
+    font-family:"Barlow Condensed",sans-serif; font-weight:700; margin:0;
+    font-size:1.15rem; letter-spacing:.14em; text-transform:uppercase;
+  }
+  .listhead .cnt{ font-size:.9rem; color:var(--muted); }
+
+  ol.rows{ list-style:none; margin:0; padding:0;
+    background:var(--surface); border:1px solid var(--border); border-radius:.5rem;
+    overflow:hidden; box-shadow:var(--shadow); }
+  li.row{
+    display:grid; grid-template-columns:5.6rem 1fr auto; align-items:center;
+    gap:.5rem .9rem; padding:.85rem 1rem;
+    border-top:1px solid var(--border);
+  }
+  li.row:first-child{ border-top:0; }
+  .date{
+    font-family:"Barlow Condensed",sans-serif; font-weight:700;
+    font-size:1.24rem; text-transform:uppercase; letter-spacing:.02em; line-height:1.05;
+    align-self:start;
+  }
+  .what{ font-size:.98rem; }
+  .what .note{ display:block; font-size:.85rem; color:var(--muted); }
+  .time{
+    font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.95rem;
+    font-variant-numeric:tabular-nums; white-space:nowrap;
+  }
+  .badge{
+    display:inline-block; font-family:"Barlow Condensed",sans-serif; font-weight:700;
+    font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+    padding:.14rem .45rem; border-radius:.2rem; margin-left:.4rem; vertical-align:.08em;
+    background:var(--brass-bg); color:var(--brass); border:1px solid var(--brass-line);
+  }
+
+  li.row.you{ background:var(--brass-bg); }
+  li.row.you .time{ color:var(--brass); font-weight:500; }
+  li.row.off .date, li.row.off .what, li.row.off .time{ color:var(--muted); }
+  li.row.off .date{ font-weight:600; }
+  li.row.dark-day .what{ color:var(--muted); }
+  li.row.past{ opacity:.42; }
+
+  /* ---------- footer ---------- */
+  .foot{
+    margin-top:2rem; padding-top:1.25rem; border-top:1px solid var(--border);
+    font-size:.95rem; color:var(--muted);
+  }
+  .foot a{ color:var(--ink); text-decoration:underline; text-underline-offset:2px; text-decoration-color:var(--border-strong); }
+  .foot a:hover{ text-decoration-color:var(--brass); }
+  .foot a:focus-visible{ outline:2px solid var(--brass); outline-offset:2px; }
+  .foot .call{
+    font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:1.35rem;
+    color:var(--ink); text-decoration:none; letter-spacing:.02em;
+  }
+  .foot p{ margin:.5rem 0 0; }
+
+  @media (max-width:30rem){
+    li.row{ grid-template-columns:4.9rem 1fr; row-gap:.15rem; }
+    .time{ grid-column:2; grid-row:2; font-size:.9rem; white-space:normal; }
+    .what .note{ order:3; }
+  }
+  @media (prefers-reduced-motion:reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+
+<div class="mast">
+  <div class="inner">
+    <div class="eyebrow">Music 320R &nbsp;·&nbsp; BYU Studio Orchestra</div>
+    <h1>Fall 2026 Call Sheet</h1>
+    <div class="where">
+      <span>Studio Y — MB 2140</span>
+      <span>Fridays</span>
+      <span>Sept 4 – Dec 4</span>
+    </div>
+  </div>
+</div>
+
+<div class="picker">
+  <div class="inner">
+    <div class="lab">Your section</div>
+    <div class="chips" id="chips" role="group" aria-label="Filter by section"></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="next" id="next" hidden>
+    <span class="k">Your next call</span>
+    <span class="d" id="nextDate"></span>
+    <span class="t" id="nextTime"></span>
+    <span class="n" id="nextNote"></span>
+  </div>
+
+  <div class="listhead">
+    <h2>Every Friday</h2>
+    <span class="cnt" id="cnt"></span>
+  </div>
+
+  <ol class="rows" id="rows"></ol>
+
+  <div class="foot">
+    <p>Questions, or want in? Text Professor Hofheins.</p>
+    <p><a class="call" href="tel:+18014226042">801-422-6042</a></p>
+    <p>Sections alternate weeks — your call is every other Friday, 80 minutes. Sept 11 and Dec 4 are full-orchestra days for everyone.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SECTIONS = [
+    {id:'strings', label:'Strings & Harp'},
+    {id:'winds',   label:'Woodwinds'},
+    {id:'brass',   label:'Brass'},
+    {id:'perc',    label:'Percussion'},
+    {id:'all',     label:'Show all'}
+  ];
+  var A = {strings:'2:00 – 3:20 pm', winds:'3:30 – 4:50 pm'};
+  var B = {brass:'2:00 – 3:20 pm',   perc:'3:30 – 4:50 pm'};
+
+  var DAYS = [
+    {date:'2026-09-04', kind:'none'},
+    {date:'2026-09-11', kind:'full', time:'3:00 – 3:50 pm', note:'First day we meet'},
+    {date:'2026-09-18', kind:'sect', calls:A},
+    {date:'2026-09-25', kind:'sect', calls:B},
+    {date:'2026-10-02', kind:'sect', calls:A},
+    {date:'2026-10-09', kind:'sect', calls:B},
+    {date:'2026-10-16', kind:'sect', calls:A},
+    {date:'2026-10-23', kind:'sect', calls:B},
+    {date:'2026-10-30', kind:'sect', calls:A},
+    {date:'2026-11-06', kind:'sect', calls:B},
+    {date:'2026-11-13', kind:'sect', calls:A},
+    {date:'2026-11-20', kind:'sect', calls:B},
+    {date:'2026-11-27', kind:'none'},
+    {date:'2026-12-04', kind:'full', time:'2:30 – 4:00 pm', note:'Last day of class'}
+  ];
+
+  var NAME = {strings:'Strings & Harp', winds:'Woodwinds', brass:'Brass', perc:'Percussion'};
+  var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function parse(s){ var p = s.split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
+  function fmt(s){ var d = parse(s); return MON[d.getMonth()] + ' ' + d.getDate(); }
+
+  var sel = 'all';
+  try { var saved = localStorage.getItem('so-section');
+        if (saved && SECTIONS.some(function(s){ return s.id === saved; })) sel = saved; } catch(e){}
+
+  var chips = document.getElementById('chips');
+  SECTIONS.forEach(function(s){
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = s.label;
+    b.setAttribute('aria-pressed', String(s.id === sel));
+    b.addEventListener('click', function(){
+      sel = s.id;
+      try { localStorage.setItem('so-section', sel); } catch(e){}
+      Array.prototype.forEach.call(chips.children, function(c, i){
+        c.setAttribute('aria-pressed', String(SECTIONS[i].id === sel));
+      });
+      render();
+    });
+    chips.appendChild(b);
+  });
+
+  function render(){
+    var rows = document.getElementById('rows');
+    rows.innerHTML = '';
+    var today = new Date(); today.setHours(0,0,0,0);
+    var nextDay = null, nextTime = '', nextNote = '', mine = 0;
+
+    DAYS.forEach(function(d){
+      var li = document.createElement('li');
+      li.className = 'row';
+      var past = parse(d.date) < today;
+      if (past) li.classList.add('past');
+
+      var what = '', time = '', isMine = false;
+
+      if (d.kind === 'none'){
+        what = 'No class';
+        li.classList.add('off', 'dark-day');
+      } else if (d.kind === 'full'){
+        what = 'Full orchestra<span class="badge">Everyone</span>' +
+               '<span class="note">' + d.note + '</span>';
+        time = d.time; isMine = true;
+      } else if (sel === 'all'){
+        what = Object.keys(d.calls).map(function(k){ return NAME[k]; }).join(' &nbsp;·&nbsp; ');
+        time = '2:00 – 4:50 pm';
+      } else if (d.calls[sel]){
+        what = NAME[sel];
+        time = d.calls[sel]; isMine = true;
+      } else {
+        what = 'Off — ' + Object.keys(d.calls).map(function(k){ return NAME[k]; }).join(' & ') + ' only';
+        li.classList.add('off');
+      }
+
+      if (isMine && sel !== 'all'){ li.classList.add('you'); }
+      if (isMine){
+        mine++;
+        if (!past && !nextDay){ nextDay = d.date; nextTime = time; nextNote = d.note || (d.kind === 'full' ? 'Full orchestra' : NAME[sel] || ''); }
+      }
+
+      li.innerHTML =
+        '<span class="date">' + fmt(d.date) + '</span>' +
+        '<span class="what">' + what + '</span>' +
+        (time ? '<span class="time">' + time + '</span>' : '');
+      rows.appendChild(li);
+    });
+
+    var cnt = document.getElementById('cnt');
+    cnt.textContent = sel === 'all' ? DAYS.length + ' dates' : mine + ' calls for you';
+
+    var box = document.getElementById('next');
+    if (nextDay && sel !== 'all'){
+      box.hidden = false;
+      document.getElementById('nextDate').textContent = 'Friday, ' + fmt(nextDay);
+      document.getElementById('nextTime').textContent = nextTime;
+      document.getElementById('nextNote').textContent = nextNote;
+    } else {
+      box.hidden = true;
+    }
+  }
+
+  render();
+})();
+</script>
+
+</body>
+</html>
