@@ -221,7 +221,7 @@
     <div class="where">
       <span>Studio Y — MB 2140</span>
       <span>Fridays</span>
-      <span>Sept 4 – Dec 4</span>
+      <span>Sept 4 – Dec 11</span>
     </div>
   </div>
 </div>
@@ -251,7 +251,7 @@
   <div class="foot">
     <p>Questions, or want in? Text Professor Hofheins.</p>
     <p><a class="call" href="tel:+18014226042">801-422-6042</a></p>
-    <p>Sections alternate weeks — your call is every other Friday, 80 minutes. Sept 11 is a full-orchestra day for everyone.</p>
+    <p>Sections alternate weeks — your call is every other Friday, 80 minutes. Sept 11 and Dec 11 (listening party) are full-orchestra days for everyone.</p>
   </div>
 </div>
 
@@ -281,7 +281,8 @@
     {date:'2026-11-13', kind:'sect', calls:A},
     {date:'2026-11-20', kind:'sect', calls:B},
     {date:'2026-11-27', kind:'none'},
-    {date:'2026-12-04', kind:'sect', calls:A, note:'Last day of class'}
+    {date:'2026-12-04', kind:'sect', calls:A, note:'Last day of class'},
+    {date:'2026-12-11', kind:'full', time:'2:00 – 3:00 pm', title:'Listening party', note:'The full orchestra listens to the mixes of all the pieces recorded during the semester.'}
   ];
 
   var NAME = {strings:'Strings & Harp', winds:'Woodwinds', brass:'Brass', perc:'Percussion'};
@@ -328,7 +329,7 @@
         what = 'No class';
         li.classList.add('off', 'dark-day');
       } else if (d.kind === 'full'){
-        what = 'Full orchestra<span class="badge">Everyone</span>' +
+        what = (d.title || 'Full orchestra') + '<span class="badge">Everyone</span>' +
                '<span class="note">' + d.note + '</span>';
         time = d.time; isMine = true;
       } else if (sel === 'all'){
@@ -348,7 +349,10 @@
       if (isMine && sel !== 'all'){ li.classList.add('you'); }
       if (isMine){
         mine++;
-        if (!past && !nextDay){ nextDay = d.date; nextTime = time; nextNote = d.note || (d.kind === 'full' ? 'Full orchestra' : NAME[sel] || ''); }
+        if (!past && !nextDay){
+          nextDay = d.date; nextTime = time;
+          nextNote = d.title ? d.title + (d.note ? ' — ' + d.note : '') : (d.note || (d.kind === 'full' ? 'Full orchestra' : NAME[sel] || ''));
+        }
       }
 
       li.innerHTML =
