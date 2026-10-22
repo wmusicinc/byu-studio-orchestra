@@ -251,7 +251,7 @@
   <div class="foot">
     <p>Questions, or want in? Text Professor Hofheins.</p>
     <p><a class="call" href="tel:+18014226042">801-422-6042</a></p>
-    <p>Sections alternate weeks — your call is every other Friday, 80 minutes. Sept 11 and Dec 4 are full-orchestra days for everyone.</p>
+    <p>Sections alternate weeks — your call is every other Friday, 80 minutes. Sept 11 is a full-orchestra day for everyone.</p>
   </div>
 </div>
 
@@ -281,7 +281,7 @@
     {date:'2026-11-13', kind:'sect', calls:A},
     {date:'2026-11-20', kind:'sect', calls:B},
     {date:'2026-11-27', kind:'none'},
-    {date:'2026-12-04', kind:'full', time:'2:30 – 4:00 pm', note:'Last day of class'}
+    {date:'2026-12-04', kind:'sect', calls:A, note:'Last day of class'}
   ];
 
   var NAME = {strings:'Strings & Harp', winds:'Woodwinds', brass:'Brass', perc:'Percussion'};
@@ -333,12 +333,15 @@
         time = d.time; isMine = true;
       } else if (sel === 'all'){
         what = Object.keys(d.calls).map(function(k){ return NAME[k]; }).join(' &nbsp;·&nbsp; ');
+        if (d.note) what += '<span class="note">' + d.note + '</span>';
         time = '2:00 – 4:50 pm';
       } else if (d.calls[sel]){
         what = NAME[sel];
+        if (d.note) what += '<span class="note">' + d.note + '</span>';
         time = d.calls[sel]; isMine = true;
       } else {
         what = 'Off — ' + Object.keys(d.calls).map(function(k){ return NAME[k]; }).join(' & ') + ' only';
+        if (d.note) what += '<span class="note">' + d.note + '</span>';
         li.classList.add('off');
       }
 
